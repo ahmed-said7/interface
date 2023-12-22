@@ -36,7 +36,7 @@ router.post('/comment',async function(req,res,next){
     await pool.query(`INSERT INTO comment
     (post_id,user_id,content) 
     VALUES ($1,$2,$3)`,[post_id,user_id,content]);
-    res.redirect('http://localhost:4000/posts/comment');
+    res.redirect('http://localhost:4000/post/comment');
 });
 router.get('/comment',async function(req,res,next){
     res.render('insert-comment');
@@ -72,11 +72,18 @@ router.get('/caption-tag',async function(req,res,next){
     res.render('insert-caption-tag');
 });
 router.post('/likes',async function(req,res,next){
-    const {post_id,user_id,comment_id}=req.body;
-    await pool.query(`INSERT INTO likes
-    (post_id,user_id,comment_id) 
-    VALUES ($1,$2,$3)`,[post_id,user_id,comment_id]);
-    res.redirect('http://localhost:4000/tag/caption');
+    const {post_id,user_id,comment_id,type}=req.body;
+    console.log(req.body);
+    if(comment_id){
+        await pool.query(`INSERT INTO likes
+        (comment_id,user_id,type) 
+        VALUES ($1,$2,$3)`,[comment_id,user_id,type]);
+    }else{
+        await pool.query(`INSERT INTO likes
+        (post_id,user_id,type) 
+        VALUES ($1,$2,$3)`,[post_id,user_id,type]);
+    };
+    res.redirect('http://localhost:4000/post/likes');
 });
 router.get('/likes',async function(req,res,next){
     res.render('insert-likes');

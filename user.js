@@ -3,8 +3,8 @@ const router = express.Router();
 const pool = require('./db');
 
 router.get('/',async function(req,res,next){
-    const {rows} =await pool.query(`SELECT * FROM users ORDER BY username,email`);
-    res.render('users.ejs',{rows});
+    const {rows} =await pool.query(`SELECT username,email,phone,status FROM users ORDER BY username,email`);
+    res.render('public.ejs',{rows,keys:['username','email','phone','status']});
 });
 router.get('/follower',async function(req,res,next){
     const {rows} =await pool.query(`SELECT user_id,username AS follower FROM follower JOIN users ON
