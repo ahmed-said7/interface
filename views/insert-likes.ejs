@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>My Webpage</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="http://localhost:4000/insert/likes" method="POST">
+            <label for="comment_id">comment Id:</label>
+            <input type="number" id="comment_id" name="comment_id"><br><br>
+            <label for="user_id">User ID:</label>
+            <input type="number" id="user_id" name="user_id"><br><br>
+            <label for="post_id">Post Id</label>
+            <input type="number" id="post_id" name="post_id"><br><br>
+            <button type="submit">Create like</button>
+        </form>
+        <a href="http://localhost:4000/home">Back to Home</a>
+    </body>
+</html>
